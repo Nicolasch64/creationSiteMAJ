@@ -77,7 +77,7 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = (to, subject, text, html) => {
 	const mailOptions = {
-		from: "chapellen10@gmail.com",
+		from: "ton_email@gmail.com", // Ton email
 		to,
 		subject,
 		text,
@@ -86,9 +86,9 @@ const sendEmail = (to, subject, text, html) => {
 
 	transporter.sendMail(mailOptions, (error, info) => {
 		if (error) {
-			console.log("Error:", error);
+			console.log("Erreur:", error);
 		} else {
-			console.log("Email sent: " + info.response);
+			console.log("Email envoyé:", info.response);
 		}
 	});
 };
@@ -102,6 +102,7 @@ const ajouterDessins = () => {
 	const dessinsDir = path.resolve(__dirname, "../Frontend/images/dessins");
 	console.log("Chemin vers le dossier dessins:", dessinsDir);
 
+	// Lire les fichiers du dossier 'dessins'
 	fs.readdir(dessinsDir, (err, files) => {
 		if (err) {
 			console.error("Erreur lors de la lecture du dossier dessins:", err);
@@ -117,25 +118,45 @@ const ajouterDessins = () => {
 				}
 
 				if (stat.isFile()) {
-					const imageUrl = `/images/dessins/${file}`; // URL relative pour l'image
+					// Vérifie si l'image existe déjà dans la base de données
+					Oeuvre.findOne({ titre: file }) // Ici, on utilise le titre comme identifiant unique
+						.then((existingOeuvre) => {
+							if (!existingOeuvre) {
+								// Si l'œuvre n'existe pas déjà
+								const imageUrl = `/images/dessins/${file}`; // URL relative pour l'image
 
-					// Créer une nouvelle oeuvre avec l'URL de l'image
-					const oeuvre = new Oeuvre({
-						titre: file,
-						description: "Description de l'œuvre",
-						prix: 100,
-						image: imageUrl,
-						categorie: "dessins",
-					});
+								// Créer une nouvelle oeuvre avec l'URL de l'image
+								const oeuvre = new Oeuvre({
+									titre: file, // Le titre peut être le nom de l'image ou autre chose
+									description: "Description de l'œuvre", // Tu peux personnaliser cela
+									prix: 100, // Prix à définir
+									image: imageUrl,
+									categorie: "dessins",
+								});
 
-					// Sauvegarder l'objet dans MongoDB
-					oeuvre
-						.save()
-						.then(() => {
-							console.log(`Image ${file} ajoutée à la base de données`);
+								// Sauvegarder l'objet dans MongoDB
+								oeuvre
+									.save()
+									.then(() => {
+										console.log(`Image ${file} ajoutée à la base de données`);
+									})
+									.catch((err) => {
+										console.error(
+											`Erreur lors de l'ajout de l'image ${file}:`,
+											err
+										);
+									});
+							} else {
+								console.log(
+									`L'image ${file} existe déjà dans la base de données.`
+								);
+							}
 						})
 						.catch((err) => {
-							console.error(`Erreur lors de l'ajout de l'image ${file}:`, err);
+							console.error(
+								"Erreur lors de la recherche de l'œuvre dans la base de données:",
+								err
+							);
 						});
 				}
 			});
@@ -150,6 +171,7 @@ const ajouterPeintures = () => {
 	const peinturesDir = path.resolve(__dirname, "../Frontend/images/peintures");
 	console.log("Chemin vers le dossier peintures:", peinturesDir);
 
+	// Lire les fichiers du dossier 'dessins'
 	fs.readdir(peinturesDir, (err, files) => {
 		if (err) {
 			console.error("Erreur lors de la lecture du dossier peintures:", err);
@@ -165,25 +187,45 @@ const ajouterPeintures = () => {
 				}
 
 				if (stat.isFile()) {
-					const imageUrl = `/images/peintures/${file}`; // URL relative pour l'image
+					// Vérifie si l'image existe déjà dans la base de données
+					Oeuvre.findOne({ titre: file }) // Ici, on utilise le titre comme identifiant unique
+						.then((existingOeuvre) => {
+							if (!existingOeuvre) {
+								// Si l'œuvre n'existe pas déjà
+								const imageUrl = `/images/peintures/${file}`; // URL relative pour l'image
 
-					// Créer une nouvelle oeuvre avec l'URL de l'image
-					const oeuvre = new Oeuvre({
-						titre: file,
-						description: "Description de l'œuvre",
-						prix: 100,
-						image: imageUrl,
-						categorie: "peintures",
-					});
+								// Créer une nouvelle oeuvre avec l'URL de l'image
+								const oeuvre = new Oeuvre({
+									titre: file, // Le titre peut être le nom de l'image ou autre chose
+									description: "Description de l'œuvre", // Tu peux personnaliser cela
+									prix: 100, // Prix à définir
+									image: imageUrl,
+									categorie: "peintures",
+								});
 
-					// Sauvegarder l'objet dans MongoDB
-					oeuvre
-						.save()
-						.then(() => {
-							console.log(`Image ${file} ajoutée à la base de données`);
+								// Sauvegarder l'objet dans MongoDB
+								oeuvre
+									.save()
+									.then(() => {
+										console.log(`Image ${file} ajoutée à la base de données`);
+									})
+									.catch((err) => {
+										console.error(
+											`Erreur lors de l'ajout de l'image ${file}:`,
+											err
+										);
+									});
+							} else {
+								console.log(
+									`L'image ${file} existe déjà dans la base de données.`
+								);
+							}
 						})
 						.catch((err) => {
-							console.error(`Erreur lors de l'ajout de l'image ${file}:`, err);
+							console.error(
+								"Erreur lors de la recherche de l'œuvre dans la base de données:",
+								err
+							);
 						});
 				}
 			});
@@ -191,8 +233,7 @@ const ajouterPeintures = () => {
 	});
 };
 
-// 2. Appeler la fonction après sa déclaration
-ajouterPeintures(); // Appel de la fonction ici
+ajouterPeintures();
 
 // Route pour recevoir les achats
 app.post("/submit", async (req, res) => {
@@ -200,6 +241,7 @@ app.post("/submit", async (req, res) => {
 		req.body;
 	console.log("Received productId:", productId);
 
+	// Tu peux rechercher l'œuvre dans la base de données MongoDB
 	let oeuvre;
 	try {
 		oeuvre = await Oeuvre.findById(productId);
@@ -214,28 +256,32 @@ app.post("/submit", async (req, res) => {
 		return res.status(404).json({ message: "Oeuvre non trouvée!" });
 	}
 
+	// Créer l'objet de la commande
 	const purchase = new Purchase({
 		acheteur: {
 			nom: name,
 			email,
 			adresse: address,
-			telephone: req.body.telephone,
+			telephone: req.body.telephone, // Assure-toi que ce champ est dans le formulaire si tu veux l'envoyer
 		},
 		oeuvre: oeuvre._id,
 		paymentMethod,
 	});
 
 	try {
+		// Sauvegarder la commande
 		const savedPurchase = await purchase.save();
 
+		// Message pour l'utilisateur
 		const userMessage = `
-      <h3>Merci beaucoup pour votre commande, ${name}</h3>
-      <p>Nous avons bien reçu votre commande pour "${productName}".</p>
-      <p>Prix: ${price}€</p>
-      <p>Adresse de livraison: ${address}</p>
-      <p>Méthode de paiement: ${paymentMethod}</p>
-      <p>Nous vous enverrons un e-mail lorsque votre commande sera expédiée.</p>`;
+        <h3>Merci beaucoup pour votre commande, ${name}</h3>
+        <p>Nous avons bien reçu votre commande pour "${productName}".</p>
+        <p>Prix: ${price}€</p>
+        <p>Adresse de livraison: ${address}</p>
+        <p>Méthode de paiement: ${paymentMethod}</p>
+        <p>Nous vous enverrons un e-mail lorsque votre commande sera expédiée.</p>`;
 
+		// Envoi de l'email à l'utilisateur
 		sendEmail(
 			email,
 			"Confirmation de votre commande",
@@ -243,23 +289,26 @@ app.post("/submit", async (req, res) => {
 			userMessage
 		);
 
+		// Message pour l'administrateur
 		const adminMessage = `
-      <h3>Nouvelle vente</h3>
-      <p>Un utilisateur a acheté "${productName}".</p>
-      <p><strong>Nom:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Adresse de livraison:</strong> ${address}</p>
-      <p><strong>Prix:</strong> ${price}€</p>
-      <p><strong>Méthode de paiement:</strong> ${paymentMethod}</p>
-    `;
+        <h3>Nouvelle vente</h3>
+        <p>Un utilisateur a acheté "${productName}".</p>
+        <p><strong>Nom:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Adresse de livraison:</strong> ${address}</p>
+        <p><strong>Prix:</strong> ${price}€</p>
+        <p><strong>Méthode de paiement:</strong> ${paymentMethod}</p>
+        `;
 
+		// Envoi de l'email à l'administrateur
 		sendEmail(
-			"chapellen10@gmail.com",
+			"admin@example.com",
 			"Nouvelle vente",
 			"Une nouvelle vente a été effectuée",
 			adminMessage
 		);
 
+		// Réponse à l'utilisateur
 		res.status(200).json({
 			message: "Purchase recorded successfully!",
 			date: savedPurchase.dateCommande,
@@ -269,6 +318,6 @@ app.post("/submit", async (req, res) => {
 	}
 });
 
-app.listen(5055, () => {
-	console.log("Server is running on http://localhost:5055");
+app.listen(5056, () => {
+	console.log("Server is running on http://localhost:5056");
 });
