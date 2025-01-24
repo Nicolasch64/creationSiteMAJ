@@ -5,7 +5,7 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
-const Oeuvre = require("./models/oeuvres"); // Une seule déclaration ici
+const Oeuvre = require("./models/oeuvres");
 const Purchase = require("./models/purchase");
 require("dotenv").config();
 
@@ -13,40 +13,51 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connexion à MongoDB
+app.post("/test-purchase", async (req, res) => {
+	try {
+		// Créer un achat avec des informations simples
+		const purchase = new Purchase({
+			acheteur: {
+				nom: "Test User",
+				email: "test@example.com",
+				adresse: "123 Test Street",
+				telephone: "0123456789",
+			},
+			oeuvre: "67938edc01227ff458e40933", // Remplacer par un ObjectId valide d'une oeuvre
+			paymentMethod: "credit_card",
+		});
+
+		// Sauvegarder l'achat dans la base de données
+		const savedPurchase = await purchase.save();
+
+		// Retourner la réponse
+		res.status(200).json({
+			message: "Achat enregistré avec succès !",
+			purchase: savedPurchase,
+		});
+	} catch (err) {
+		res.status(500).json({
+			message: "Erreur lors de l'enregistrement de l'achat.",
+			error: err.message,
+		});
+	}
+});
+
 mongoose
-	.connect("mongodb://localhost:27017/db_site", {})
+	.connect("mongodb://localhost:27017/db_site", {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
 	.then(() => {
-		console.log("Connected to MongoDB");
-
-		// Forcer la création des collections 'oeuvres' et 'purchases'
-		const db = mongoose.connection.db;
-
-		// Créer manuellement la collection "oeuvres"
-		db.createCollection("oeuvres")
-			.then(() => console.log("Collection 'oeuvres' créée avec succès"))
-			.catch((err) =>
-				console.error(
-					"Erreur lors de la création de la collection 'oeuvres':",
-					err
-				)
-			);
-
-		// Créer manuellement la collection "purchases"
-		db.createCollection("purchases")
-			.then(() => console.log("Collection 'purchases' créée avec succès"))
-			.catch((err) =>
-				console.error(
-					"Erreur lors de la création de la collection 'purchases':",
-					err
-				)
-			);
+		console.log("Connected to MongoDB db_site");
 	})
 	.catch((error) => {
-		console.log("Error connecting to MongoDB:", error);
+		console.log("Error connecting to MongoDB:", error.message);
 	});
 
-// Schéma de la commande (purchase)
+// Forcer la création des collections 'oeuvres' et 'purchases'
+const db = mongoose.connection.db;
+
 const purchaseSchema = new mongoose.Schema(
 	{
 		acheteur: {
@@ -64,7 +75,9 @@ const purchaseSchema = new mongoose.Schema(
 		dateCommande: { type: Date, default: Date.now },
 	},
 	{ timestamps: true }
-);
+); // Cette ligne doit être dans les accolades du schéma
+
+module.exports = Purchase;
 
 // Initialisation de Nodemailer pour l'envoi des emails
 const transporter = nodemailer.createTransport({
@@ -241,12 +254,12 @@ app.post("/submit", async (req, res) => {
 		req.body;
 	console.log("Received productId:", productId);
 
-	// Tu peux rechercher l'œuvre dans la base de données MongoDB
+	// Recherche de l'œuvre dans la base de données
 	let oeuvre;
 	try {
 		oeuvre = await Oeuvre.findById(productId);
 	} catch (err) {
-		console.error(err);
+		console.error("Erreur lors de la recherche de l'œuvre:", err);
 		return res
 			.status(500)
 			.json({ message: "Erreur lors de la recherche de l'œuvre" });
@@ -256,30 +269,33 @@ app.post("/submit", async (req, res) => {
 		return res.status(404).json({ message: "Oeuvre non trouvée!" });
 	}
 
+	console.log("Oeuvre trouvée:", oeuvre);
+
 	// Créer l'objet de la commande
 	const purchase = new Purchase({
 		acheteur: {
 			nom: name,
 			email,
 			adresse: address,
-			telephone: req.body.telephone, // Assure-toi que ce champ est dans le formulaire si tu veux l'envoyer
 		},
-		oeuvre: oeuvre._id,
+		oeuvre: oeuvre._id, // Utilisation de l'ID de l'œuvre
 		paymentMethod,
 	});
 
 	try {
 		// Sauvegarder la commande
 		const savedPurchase = await purchase.save();
+		console.log("Purchase saved:", savedPurchase); // Log de l'achat enregistré
 
 		// Message pour l'utilisateur
 		const userMessage = `
-        <h3>Merci beaucoup pour votre commande, ${name}</h3>
-        <p>Nous avons bien reçu votre commande pour "${productName}".</p>
-        <p>Prix: ${price}€</p>
-        <p>Adresse de livraison: ${address}</p>
-        <p>Méthode de paiement: ${paymentMethod}</p>
-        <p>Nous vous enverrons un e-mail lorsque votre commande sera expédiée.</p>`;
+      <h3>Merci beaucoup pour votre commande, ${name}</h3>
+      <p>Nous avons bien reçu votre commande pour "${productName}".</p>
+      <p>Prix: ${price}€</p>
+      <p>Adresse de livraison: ${address}</p>
+      <p>Méthode de paiement: ${paymentMethod}</p>
+      <p>Nous vous enverrons un e-mail lorsque votre commande sera expédiée.</p>
+    `;
 
 		// Envoi de l'email à l'utilisateur
 		sendEmail(
@@ -291,14 +307,14 @@ app.post("/submit", async (req, res) => {
 
 		// Message pour l'administrateur
 		const adminMessage = `
-        <h3>Nouvelle vente</h3>
-        <p>Un utilisateur a acheté "${productName}".</p>
-        <p><strong>Nom:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Adresse de livraison:</strong> ${address}</p>
-        <p><strong>Prix:</strong> ${price}€</p>
-        <p><strong>Méthode de paiement:</strong> ${paymentMethod}</p>
-        `;
+      <h3>Nouvelle vente</h3>
+      <p>Un utilisateur a acheté "${productName}".</p>
+      <p><strong>Nom:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Adresse de livraison:</strong> ${address}</p>
+      <p><strong>Prix:</strong> ${price}€</p>
+      <p><strong>Méthode de paiement:</strong> ${paymentMethod}</p>
+    `;
 
 		// Envoi de l'email à l'administrateur
 		sendEmail(
@@ -314,6 +330,7 @@ app.post("/submit", async (req, res) => {
 			date: savedPurchase.dateCommande,
 		});
 	} catch (error) {
+		console.error("Erreur lors de l'enregistrement de l'achat:", error);
 		res.status(500).json({ message: "Error saving purchase data" });
 	}
 });

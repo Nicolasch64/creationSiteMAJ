@@ -19,6 +19,4 @@ const purchaseSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const Purchase = mongoose.model("Purchase", purchaseSchema);
-
-module.exports = Purchase;
+const Purchase = mongoose.model("Purchase", purchaseSchema, "purchases"); // 'purchases' est le nom de la collection
