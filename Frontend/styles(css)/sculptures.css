@@ -1,0 +1,223 @@
+a:link,
+a:hover,
+a:visited,
+a:active {
+	text-decoration: none;
+	color: black;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+}
+img {
+	width: 100%;
+	max-height: 100vh;
+}
+
+h1 {
+	display: inline-block;
+	font-size: 3em;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-left: 2%;
+	width: 9em;
+}
+
+.globenomcontainer {
+	display: flex;
+	justify-content: space-between;
+	height: 4em;
+}
+.langue {
+	/* display: flex;
+	justify-content: end;
+	position: absolute;
+	top: 0;
+	right: 0; */
+
+	margin-right: 5%;
+	margin-top: 2%;
+}
+
+.language-menu {
+	display: none; /* Masquer le menu par défaut */
+	position: absolute;
+	top: 40px; /* Positionnez-le sous l'icône du globe */
+	right: 20px;
+	background-color: white;
+	border: 1px solid #000000;
+	padding: 10px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	z-index: 10;
+}
+
+.language-menu ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.language-menu ul li {
+	padding: 8px 16px;
+}
+
+.language-menu ul li a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+
+	color: rgb(0, 0, 0);
+}
+
+.language-menu ul li:hover {
+	background-color: #f0f0f0;
+}
+
+.language-menu.show {
+	display: block;
+}
+.retour {
+	display: flex;
+	justify-content: end;
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-right: 5%;
+	margin-top: 2.3%;
+}
+
+.return {
+	width: 1.5em;
+}
+
+.langue {
+	display: flex;
+	justify-content: end;
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-right: 2%;
+	margin-top: 2%;
+}
+
+.catégories {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	background-color: rgb(255, 255, 255);
+	border-bottom: 5px solid black;
+}
+.dessins {
+	display: flex;
+	margin-left: 1em;
+}
+.sculptures {
+	display: flex;
+	margin-right: 2%;
+}
+
+.cat1 {
+	display: flex;
+	justify-content: center;
+	margin-right: 5%;
+}
+
+h2 {
+	font-size: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.image {
+	display: flex;
+	flex-direction: column;
+	justify-content: baseline;
+	gap: 100px;
+
+	background-color: rgb(255, 255, 255);
+	margin-top: 2%;
+	overflow-y: scroll;
+	flex-grow: 1;
+	padding-bottom: 80px;
+}
+
+.range {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 1em;
+	background-color: rgb(255, 255, 255);
+
+	padding-bottom: 3em;
+	margin-left: 1em;
+	margin-right: 1em;
+	height: 30em;
+}
+.jim {
+	width: 60em;
+	height: 35em;
+
+	margin-top: 1em;
+}
+
+.texte {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	align-content: flex-end;
+	font-size: 0.75em;
+	margin-left: 85em;
+	width: 25em;
+}
+
+footer {
+	background-color: rgb(255, 255, 255);
+	margin-top: 2em;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-top: 3px solid black;
+}
+
+.mentions {
+	color: rgb(0, 0, 0);
+	margin-left: 1%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.5em;
+	margin-bottom: 2%;
+	margin-top: 2%;
+}
+
+.instagram {
+	height: 20px;
+	width: 20px;
+	margin-top: 3em;
+}
+
+.mail {
+	display: flex;
+	justify-content: end;
+	height: 20px;
+	margin-right: 10%;
+	margin-top: 3em;
+}
+
+/* .mentions {
+	font-size: 0.5em;
+	color: rgb(0, 0, 0);
+}
+
+.instagram {
+	height: 20px;
+	width: 20px;
+}
+
+.mail {
+	display: flex;
+	justify-content: center;
+	height: 20px;
+} */

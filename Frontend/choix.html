@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>choix</title>
+    <link rel="stylesheet" href="styles(css)/choix.css" />
+  </head>
+
+   <body>
+    <header>
+      <a href="http://127.0.0.1:5500/accueil.html"><h1>Chapelle Nicolas</h1></a>
+
+
+
+
+
+<div class="logos">
+<p class="lang"><i class="fa-solid fa-globe langue fa-2x "></i></p>
+
+
+
+
+     <a href="accueil.html"> <p class="fle"><i class="fa-solid fa-arrow-left fa-2x "></i></p></a>
+      </div>
+
+     
+
+
+
+      <div class="section"><a href="http://127.0.0.1:5500/index.html"><h3>DRAWINGS</h3> </a> </div>    
+
+    
+
+      
+
+
+     
+
+
+
+
+
+  
+    </header>
+
+
+
+
+
+
+    <div class="image">
+
+<div class="textim">
+<p >
+
+    "Day of the walking dead" ink on paper (30x40cm)2023
+
+
+
+
+</p>
+</div>
+
+
+
+
+
+    <div class="dess">    
+<img src="asset/dessins/repticoll 1.jpeg" alt="dessin Day of the dead" id="dess">
+
+</div>
+
+
+
+
+
+<div class="prix"><p >250 euros</p></div>
+
+<a href="http://127.0.0.1:5500/formachat.html"><button type="button" class="btn">inquire</button></a>
+
+
+
+
+    </div>
+
+
+
+
+      
+
+      <footer>
+      <div class="mentions">
+        <h2>mentions légales</h2>
+      </div>
+
+      <div class="instagram">
+        <a href="https://www.instagram.com/chapelle.nicolas/"
+          ><img
+            src="asset/icon/iconmonstr-instagram-11.svg"
+            alt="logo insta"
+            class="insta"
+          />
+        </a>
+      </div>
+
+      <div class="mail">
+        <a href="http://127.0.0.1:5500/boot.html">
+        <img src="asset/icon/email-svgrepo-com.svg" alt="mail" class="monmail" /></a>
+      </div>
+
+    </div>
+
+
+
+     
+    </footer>
+    <script >
+
+
+      const image = document.getElementById('dess');
+
+       
+        function openFullscreen() {
+            if (image.requestFullscreen) {
+                image.requestFullscreen();
+               
+            
+    
+  }
+            
+            
+            else if (image.mozRequestFullScreen) { 
+                image.mozRequestFullScreen();
+
+            } else if (image.webkitRequestFullscreen) { 
+                image.webkitRequestFullscreen();
+            } else if (image.msRequestFullscreen) { 
+                image.msRequestFullscreen();
+            }
+    
+        }
+
+        
+        document.querySelector( '#dess' ).addEventListener('click', openFullscreen);
+
+
+
+
+             function exitFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+      }
+    }
+
+    document.getElementById('dess').onclick = exitFullscreen;
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
+
+  
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>choix</title>
+    <link rel="stylesheet" href="styles(css)/choixpeinture1.css" />
+  </head>
+
+   <body>
+    <header>
+      <h1>Chapelle Nicolas</h1>
+
+
+
+
+
+<div class="logos">
+<p class="lang"><i class="fa-solid fa-globe langue fa-2x "></i></p>
+
+
+
+
+     <a href="accueil.html"> <p class="fle"><i class="fa-solid fa-arrow-left fa-2x "></i></p></a>
+      </div>
+
+     
+
+
+
+      <div class="section"><h3>PAINTINGS</h3>  </div>    
+
+    
+
+      
+
+
+     
+
+
+
+
+
+  
+    </header>
+
+
+
+
+
+
+    <div class="image">
+
+<div class="textim">
+<p >
+
+    "Tijuana" Aquarelle sur papier  (20x20cm)2023
+
+
+
+
+</p>
+</div>
+
+
+
+
+
+    <div class="peint" alt="im" >    
+<img src="asset/peintures/1.png" alt="tij"id="peint">
+
+</div>
+
+
+
+
+
+<div class="prix"><p >250 euros</p></div>
+
+<button type="button" class="btn">inquire</button>
+
+
+
+
+    </div>
+
+
+
+
+      
+
+      <footer>
+      <div class="mentions">
+        <h2>mentions légales</h2>
+      </div>
+
+      <div class="instagram">
+        <a href="https://www.instagram.com/chapelle.nicolas/"
+          ><img
+            src="asset/icon/iconmonstr-instagram-11.svg"
+            alt="logo insta"
+            class="insta"
+          />
+        </a>
+      </div>
+
+      <div class="mail">
+        <img src="asset/icon/email-svgrepo-com.svg" alt="mail" class="monmail" />
+      </div>
+
+    </div>
+
+
+
+     
+    </footer>
+    <script >
+
+
+
+
+
+
+ // Récupérer l'élément image
+        const image = document.getElementById('peint');
+console.log(image)
+        // Fonction pour activer le mode plein écran
+        function openFullscreen() {
+            if (image.requestFullscreen) {
+                image.requestFullscreen();
+            } else if (image.mozRequestFullScreen) { // Firefox
+                image.mozRequestFullScreen();
+            } else if (image.webkitRequestFullscreen) { // Chrome, Safari et Opera
+                image.webkitRequestFullscreen();
+            } else if (image.msRequestFullscreen) { // Internet Explorer/Edge
+                image.msRequestFullscreen();
+            }
+            console.log(image)
+        }
+
+        // Ajouter un événement au clic de l'image
+        document.querySelector( '#peint' ).addEventListener('click', openFullscreen);
+        
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
+
+  
+</html>

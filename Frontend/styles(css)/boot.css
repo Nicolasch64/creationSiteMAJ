@@ -1,0 +1,142 @@
+/* Style général du body */
+body {
+	background-image: url("./asset/photos/plage\ couscous.JPG");
+	font-family: "Helvetica", sans-serif;
+
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	color: #931010;
+}
+
+/* Conteneur principal du formulaire */
+.contact-form-container {
+	background-color: 255, 255, 255, 0.4;
+	border-radius: px;
+	border: 3px solid black;
+	padding: 40px;
+	width: 80%;
+
+	max-width: 650px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	font-size: 16px;
+	margin-left: 15em;
+}
+
+/* Titre du formulaire */
+h2 {
+	font-size: 32px;
+	color: #000000;
+	text-align: center;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+/* Style des champs de saisie (input et textarea) */
+input[type="text"],
+input[type="email"],
+textarea {
+	width: 100%;
+	padding: 15px;
+	margin: 10px 0;
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	font-size: 16px;
+	color: #d40d0d;
+	background-color: #fafafa;
+	transition: border-color 0.3s ease;
+	box-sizing: border-box;
+}
+
+/* Animation de focus sur les champs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+	border-color: #009688;
+	outline: none;
+	background-color: #fff;
+}
+
+/* Style des étiquettes (labels) */
+label {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+	display: block;
+	margin-bottom: 8px;
+}
+
+/* Style pour les zones de texte (textarea) */
+textarea {
+	resize: vertical;
+	min-height: 120px;
+	max-height: 300px;
+}
+
+/* Style pour le bouton de soumission */
+button {
+	background-color: #ffffff;
+	color: rgb(3, 3, 3);
+	padding: 15px 20px;
+	border: 2px solid black;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: bold;
+	width: 100%;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet au survol du bouton */
+button:hover {
+	background-color: #8ee3ee;
+	transform: translateY(-2px);
+}
+
+/* Style pour les messages d'erreur (s'il y en a) */
+.error {
+	color: #d32f2f;
+	font-size: 14px;
+	margin-top: -8px;
+}
+
+/* Espacement entre les groupes de champs */
+.form-group {
+}
+
+/* Style des liens (pour footer ou autres pages) */
+a {
+	color: #005f96;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.mentions {
+	margin-left: 5em;
+}
+.instagram {
+	margin-bottom: 10em;
+	margin-left: 5em;
+}
+
+@media (min-width: 600px) {
+	.contact-form-container {
+		max-width: 600px;
+		padding: 40px;
+	}
+
+	h2 {
+		font-size: 32px;
+	}
+}

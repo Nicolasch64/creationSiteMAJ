@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>choix</title>
+    <link rel="stylesheet" href="styles(css)/choix2.css" />
+  </head>
+
+   <body>
+    <header>
+      <h1>Chapelle Nicolas</h1>
+
+
+
+
+
+<div class="logos">
+<p class="lang"><i class="fa-solid fa-globe langue fa-2x "><img src="../icon/globe-solid.svg" alt=""></i></p>
+
+
+
+
+     <a href="accueil.html"> <p class="fle"><i class="fa-solid fa-arrow-left fa-2x ">
+      <img src="../icon/reshot-icon-arrow-down-left-UWVYFZ6K2J.svg" alt="">
+     </i></p></a>
+      </div>
+
+     
+
+
+
+      <div class="section"><h3>DRAWINGS</h3>  </div>    
+
+    
+
+      
+
+
+     
+
+
+
+
+
+  
+    </header>
+
+
+
+
+
+
+    <div class="image">
+
+<div class="textim">
+<p >
+
+    "The Shards" pastel on paper (45x20cm)2023
+
+
+
+
+</p>
+</div>
+
+
+
+
+
+    <div class="dess">    
+<img src="../dessins/bret.jpg" id="dess">
+
+</div>
+
+
+
+
+
+<div class="prix"><p >350 euros</p></div>
+
+<a href="http://127.0.0.1:5500/formachat.html"><button type="button" class="btn">inquire</button></a>
+
+
+
+
+    </div>
+
+
+
+
+      
+
+      <footer>
+      <div class="mentions">
+        <h2>mentions légales</h2>
+      </div>
+
+      <div class="instagram">
+        <a href="https://www.instagram.com/chapelle.nicolas/"
+          ><img
+            src="../icon/iconmonstr-instagram-11.svg"
+            alt="logo insta"
+            class="insta"
+          />
+        </a>
+      </div>
+
+      <div class="mail">
+        <img src="../icon/email-svgrepo-com.svg" alt="mail" class="monmail" />
+      </div>
+
+    </div>
+
+
+
+     
+    </footer>
+    <script >
+
+
+      const image = document.getElementById('dess');
+
+       
+        function openFullscreen() {
+            if (image.requestFullscreen) {
+                image.requestFullscreen();
+               
+            
+    
+  }
+            
+            
+            else if (image.mozRequestFullScreen) { // Firefox
+                image.mozRequestFullScreen();
+
+            } else if (image.webkitRequestFullscreen) { // Chrome, Safari et Opera
+                image.webkitRequestFullscreen();
+            } else if (image.msRequestFullscreen) { // Internet Explorer/Edge
+                image.msRequestFullscreen();
+            }
+    
+        }
+
+        
+        document.querySelector( '#dess' ).addEventListener('click', openFullscreen);
+
+
+
+
+             function exitFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+      }
+    }
+
+    document.getElementById('dess').onclick = exitFullscreen;
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
+
+  
+</html>

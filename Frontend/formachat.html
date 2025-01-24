@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Formulaire d'Achat</title>
+		<link rel="stylesheet" href="styles(css)/formachat.css" />
+	</head>
+	<body>
+		<div class="purchase-form-container">
+			<h1>Purchase Form</h1>
+
+			<div class="product-display">
+				<a href="http://127.0.0.1:5500/choix.html"
+					><img
+						src="asset/dessins/repticoll 1.jpeg"
+						alt="Peinture ou dessin"
+						class="rept"
+				/></a>
+				<div class="product-details">
+					<h3>"Day of the Walking Dead" - Ink on Paper 30x40cm</h3>
+					<p>Prix : 250 euros</p>
+				</div>
+			</div>
+
+			<form action="/submit" method="POST" id="login">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						placeholder="your name here"
+						required
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="email">Mail:</label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						placeholder="your mail here"
+						required
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="address">Delivery address:</label>
+					<textarea
+						id="address"
+						name="address"
+						placeholder="your adress here"
+						required
+					></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="payment">Payment method:</label>
+					<select id="payment" name="payment" required>
+						<option value="" disabled selected>-- Payment method --</option>
+						<option value="credit_card">Credit card</option>
+						<option value="paypal">PayPal/Stripe</option>
+					</select>
+				</div>
+
+				<input
+					type="hidden"
+					id="productId"
+					name="productId"
+					value="67923a45ac6c2313b3941239"
+				/>
+
+				<div class="form-group">
+					<button type="submit">Inquire</button>
+				</div>
+			</form>
+		</div>
+
+		<footer>
+			<p></p>
+		</footer>
+
+		<script>
+			let loginForm = document.getElementById("login");
+
+			loginForm.addEventListener("submit", async (e) => {
+				e.preventDefault();
+
+				const name = document.getElementById("name").value;
+				const email = document.getElementById("email").value;
+				const address = document.getElementById("address").value;
+				const paymentMethod = document.getElementById("payment").value;
+				const productName = "Day of the Walking Dead";
+				const price = 250;
+				const productId = document.getElementById("productId").value;
+
+				if (!name || !email || !address || !paymentMethod) {
+					alert("Please fill in all the fields!");
+					return;
+				}
+
+				try {
+					const response = await fetch("http://localhost:5001/submit", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							name,
+							email,
+							address,
+							paymentMethod,
+							productName,
+							price,
+							productId,
+						}),
+					});
+
+					const result = await response.json();
+
+					if (response.status === 200) {
+						alert(result.message);
+						const purchaseDate = new Date(result.date);
+						const formattedDate = purchaseDate.toLocaleString();
+						alert("Purchase Date: " + formattedDate);
+						loginForm.reset();
+					} else {
+						alert("Error submitting form: " + result.message);
+					}
+				} catch (error) {
+					console.log("Error:", error);
+					alert("Error submitting form.");
+				}
+			});
+		</script>
+	</body>
+</html>

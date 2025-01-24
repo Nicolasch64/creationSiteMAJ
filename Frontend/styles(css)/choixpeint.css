@@ -1,0 +1,152 @@
+@charset "UTF-8";
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	line-height: inherit;
+	color: inherit;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+}
+
+h1 {
+	font-size: 3em;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-left: 2%;
+}
+
+.lang {
+	width: 2em;
+	margin-left: 90em;
+}
+
+.fle {
+	width: 2em;
+	height: 2em;
+	margin-left: 90em;
+}
+
+.section {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 2.5em;
+	display: flex;
+	justify-content: end;
+	margin-right: 1em;
+}
+
+header {
+	height: 20em;
+	border-bottom: 5px solid black;
+}
+
+.dessins {
+	display: flex;
+	margin-left: 2%;
+}
+
+.sculptures {
+	display: flex;
+	margin-right: 2%;
+}
+
+h2 {
+	font-size: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.image {
+	height: 51em;
+}
+
+.sal {
+	width: 50em;
+	height: 33em;
+	margin-left: 5em;
+	border: 4px solid rgba(143, 141, 141, 0.3);
+}
+
+.textim {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-left: 41em;
+	margin-right: 1em;
+
+	width: 25em;
+}
+
+.prix {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	display: flex;
+	justify-content: end;
+	margin-right: 2em;
+	border: 2px solid black;
+	margin-top: 2em;
+	margin-left: 2em;
+	padding-right: 3em;
+}
+
+.btn {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	background-color: white;
+	margin-top: 2em;
+	margin-left: 100em;
+	width: 10em;
+	height: 4em;
+	border: 3px solid black;
+}
+
+footer {
+	background-color: rgb(255, 255, 255);
+	margin-top: 2em;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-top: 5px solid black;
+}
+
+.mentions {
+	color: rgb(0, 0, 0);
+	margin-left: 1%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.5em;
+	margin-bottom: 2%;
+	margin-top: 2%;
+}
+
+.instagram {
+	height: 20px;
+	width: 20px;
+	margin-top: 3em;
+}
+
+.mail {
+	display: flex;
+	justify-content: end;
+	height: 20px;
+	margin-right: 10%;
+	margin-top: 3em;
+}
+
+@media (max-width: 480px) {
+	body {
+		display: flex;
+		flex-direction: column;
+	}
+	.langue {
+		background-color: yellow;
+	}
+	.catégories {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		font-size: 3px;
+	}
+} /*# sourceMappingURL=choixpeint.css.map */

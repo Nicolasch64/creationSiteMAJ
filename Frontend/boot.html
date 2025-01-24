@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Formulaire de Contact</title>
+		<link rel="stylesheet" href="styles(css)/boot.css" />
+	</head>
+	<body>
+		<div class="contact-form-container">
+			<h2>Contactez-moi</h2>
+			<form id="contactform">
+				<div class="form-group">
+					<label for="nom">Nom </label>
+					<input type="text" id="nom" name="nom" required />
+				</div>
+
+				<div class="form-group">
+					<label for="email">Email :</label>
+					<input type="email" id="email" name="email" required />
+				</div>
+
+				<div class="form-group">
+					<label for="message">Votre message :</label>
+					<textarea
+						id="message"
+						name="message"
+						placeholder="Écrivez votre message ici..."
+						required
+					></textarea>
+				</div>
+
+				<button type="submit">Envoyer</button>
+			</form>
+		</div>
+
+		<footer>
+			<div class="mentions">
+				<h2>mentions légales</h2>
+			</div>
+
+			<div class="instagram">
+				<a href="https://www.instagram.com/chapelle.nicolas/"
+					><img
+						src="asset/icon/iconmonstr-instagram-11.svg"
+						alt="logo insta"
+						class="insta"
+					/>
+				</a>
+			</div>
+		</footer>
+
+		<script>
+			document
+				.getElementById("contactform")
+				.addEventListener("submit", function (event) {
+					event.preventDefault();
+
+					const name = document.getElementById("nom").value;
+					const email = document.getElementById("email").value;
+					const message = document.getElementById("message").value;
+
+					localStorage.setItem("name", name);
+					localStorage.setItem("email", email);
+					localStorage.setItem("message", message);
+				});
+
+			function displayStoredData() {
+				const storedName = localStorage.getItem("name");
+				const storedEmail = localStorage.getItem("email");
+				const storedMessage = localStorage.getItem("message");
+
+				if (storedName) {
+					document.getElementById("nom").value = storedName;
+				}
+				if (storedEmail) {
+					document.getElementById("email").value = storedEmail;
+				}
+				if (storedMessage) {
+					document.getElementById("message").value = storedMessage;
+				}
+			}
+
+			window.onload = displayStoredData;
+		</script>
+	</body>
+</html>

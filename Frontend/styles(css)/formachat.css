@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/* Style général du body */
+body {
+	font-family: "Helvetica", sans-serif;
+	background-color: #ffffff;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	color: #333;
+}
+
+/* Conteneur principal du formulaire */
+.purchase-form-container {
+	background-color: rgba(255, 255, 255, 0.6);
+	border: 3px solid black;
+	padding: 30px;
+	width: 100%;
+	max-width: 600px;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+	box-sizing: border-box; /* S'assurer que le padding et la bordure sont inclus dans la taille totale */
+}
+
+/* Image du produit */
+.rept {
+	width: 100%; /* Ajoute 100% pour s'assurer que l'image occupe toute la largeur du conteneur */
+	height: auto; /* La hauteur est automatique pour respecter le ratio de l'image */
+	max-width: 150px; /* Limite la taille de l'image pour qu'elle ne devienne pas trop grande */
+	display: block; /* Bloque l'affichage pour s'assurer qu'elle ne dépasse pas */
+	margin: 0 auto; /* Centrer l'image horizontalement */
+}
+
+/* Détails du produit */
+.product-details {
+	font-family: Arial, Helvetica, sans-serif;
+	margin-top: 20px;
+}
+
+h1 {
+	text-align: center;
+	font-size: 32px;
+	color: #222;
+	margin-bottom: 30px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+	box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+}
+
+label {
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	display: block;
+	margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
+	width: 100%;
+	padding: 12px;
+	margin: 8px 0;
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	font-size: 16px;
+	color: #333;
+	background-color: #f9f9f9;
+	box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur de l'élément */
+}
+
+/* Style de focus sur les champs */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+	border-color: #009688;
+	outline: none;
+	background-color: #fff;
+}
+
+/* Style pour le bouton de soumission */
+button {
+	background-color: #ffffff;
+	color: rgb(8, 8, 8);
+	padding: 14px 20px;
+	border: none;
+	border-radius: 2px;
+	border: 2px solid black;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold;
+	width: 100%;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+	background-color: #34bbd3;
+	transform: translateY(-2px);
+}
+
+/* Message d'erreur */
+.error {
+	color: red;
+	font-size: 14px;
+	margin-top: -10px;
+}
+
+footer {
+	text-align: center;
+	margin-top: 40px;
+	font-size: 14px;
+	color: #777;
+}
+
+@media (min-width: 768px) {
+	.purchase-form-container {
+		padding: 40px;
+		max-width: 700px;
+	}
+	h1 {
+		font-size: 36px;
+	}
+	button {
+		font-size: 20px;
+	}
+}

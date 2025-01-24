@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>choix</title>
+    <link rel="stylesheet" href="styles(css)/choixsculpture.css" />
+  </head>
+
+   <body>
+    <header>
+ <a href="http://127.0.0.1:5500/accueil.html"> <h1>Chapelle Nicolas</h1></a>
+
+
+
+
+
+<div class="logos">
+<p class="lang"><i class="fa-solid fa-globe langue fa-2x "></i></p>
+
+
+
+
+      <p class="fle"><i class="fa-solid fa-arrow-left fa-2x "></i></p>
+      </div>
+
+     
+
+
+
+      <div class="section"><h3>SCULPTURES</h3>  </div>    
+
+    
+
+      
+
+
+     
+
+
+
+
+
+  
+    </header>
+
+
+
+
+
+
+    <div class="image">
+
+<div class="textim">
+<p >
+
+   "Jimmy Carter Mexican" matériaux mixtes  <br>
+    320x200cm
+     2021
+
+
+
+
+
+
+</p>
+</div>
+
+
+
+
+
+    <div class="jim">    
+<img src="asset/scultptures/jimmycarter.jpg" alt="jimmycarter"id="jim">
+
+</div>
+
+
+
+
+
+<div class="prix"><p >2250 euros</p></div>
+
+<button type="button" class="btn">inquire</button>
+
+
+
+
+    </div>
+
+
+
+
+      
+
+      <footer>
+      <div class="mentions">
+        <h2>mentions légales</h2>
+      </div>
+
+      <div class="instagram">
+        <a href="https://www.instagram.com/chapelle.nicolas/"
+          ><img
+            src="asset/icon/iconmonstr-instagram-11.svg"
+            alt="logo insta"
+            class="insta"
+          />
+        </a>
+      </div>
+
+      <div class="mail">
+        <img src="asset/icon/email-svgrepo-com.svg" alt="mail" class="monmail" />
+      </div>
+
+    </div>
+
+
+
+     
+    </footer>
+        <script >
+
+
+      const image = document.getElementById('jim');
+
+       
+        function openFullscreen() {
+            if (image.requestFullscreen) {
+                image.requestFullscreen();
+               
+            
+    
+  }
+            
+            
+            else if (image.mozRequestFullScreen) { 
+                image.mozRequestFullScreen();
+
+            } else if (image.webkitRequestFullscreen) { 
+                image.webkitRequestFullscreen();
+            } else if (image.msRequestFullscreen) { 
+                image.msRequestFullscreen();
+            }
+    
+        }
+
+        
+        document.querySelector( '#jim' ).addEventListener('click', openFullscreen);
+
+
+
+
+             function exitFullscreen() {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) { // Firefox
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { // IE/Edge
+        document.msExitFullscreen();
+      }
+    }
+
+    document.getElementById('jim').onclick = exitFullscreen;
+
+
+
+
+
+
+    </script>
+    <script src="https://kit.fontawesome.com/8e68aefddc.js" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+  
+</html>

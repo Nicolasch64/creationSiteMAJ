@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>bio</title>
+	</head>
+	<style>
+		a:link,
+		a:hover,
+		a:visited,
+		a:active {
+			text-decoration: none;
+			color: black;
+		}
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+		}
+		.photo {
+			margin: 10px;
+			width: 20em;
+		}
+
+		#bio {
+			margin-bottom: 20px;
+			border-bottom: 3px solid black;
+		}
+		#photo-gallery {
+			display: flex;
+			flex-wrap: wrap;
+
+			border-bottom: 3px solid black;
+		}
+		#loadButton {
+			background-color: rgb(255, 255, 255);
+			width: 40em;
+			height: 10em;
+			border: solid 2px black;
+			margin-left: 35em;
+			margin-top: 20em;
+			color: gray;
+		}
+		#fullscreen-img {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.8);
+			display: none;
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+		}
+
+		#fullscreen-img img {
+			max-width: 90%;
+			max-height: 90%;
+		}
+
+		#fullscreen-img.active {
+			display: flex;
+		}
+	</style>
+	<body>
+		<h1>BIOGRAPHY</h1>
+		<div id="bio"></div>
+
+		<h2>Photo Gallery</h2>
+		<div id="photo-gallery"></div>
+
+		<button id="loadButton">Upload biography and photos</button>
+		<div id="fullscreen-img">
+			<img id="fullscreen-image" src="" alt="Image en plein écran" />
+		</div>
+
+		<script src="bio.js"></script>
+	</body>
+</html>

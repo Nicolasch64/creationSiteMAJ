@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>sculptures</title>
+		<link rel="stylesheet" href="styles(css)/sculptures.css" />
+	</head>
+	<body>
+		<header>
+			<div class="globenomcontainer">
+				<a href="http://127.0.0.1:5500/accueil.html"
+					><h1>Chapelle Nicolas</h1></a
+				>
+				<i class="fa-solid fa-globe langue fa-2xl" id="choixlangue"></i>
+
+				<div id="languageMenu" class="language-menu">
+					<ul>
+						<li><a href="#">Fr</a></li>
+						<li><a href="#">Eng</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="cat1"><h2>SCULPTURES</h2></div>
+
+			<nav>
+				<div class="catégories">
+					<a href="http://127.0.0.1:5500/index.html">
+						<div class="dessins"><h2>drawings</h2></div>
+					</a>
+					<a href="http://127.0.0.1:5500/peintures.html">
+						<div class="peintures"><h2>paintings</h2></div>
+					</a>
+					<a href="http://127.0.0.1:5500/photos.html">
+						<div class="photos"><h2>pictures</h2></div>
+					</a>
+					<div class="sculptures"><h2>sculptures</h2></div>
+				</div>
+			</nav>
+		</header>
+
+		<div class="image">
+			<div class="range">
+				<figure class="Jimmy">
+					<div class="jim">
+						<a href="http://127.0.0.1:5500/choixsculpture.html">
+							<img
+								src="asset/scultptures/jimmycarter.jpg"
+								alt="Sculpture Jimmy Carter"
+							/>
+						</a>
+					</div>
+					<figcaption class="texte">
+						<p>
+							"Jimmy Carter Mexican" sculpture matériaux mixtes (320x200cm) 2021
+						</p>
+					</figcaption>
+				</figure>
+			</div>
+		</div>
+
+		<footer>
+			<div class="mentions">
+				<h2>Mentions légales</h2>
+			</div>
+
+			<div class="instagram">
+				<a href="https://www.instagram.com/chapelle.nicolas/">
+					<img
+						src="asset/icon/iconmonstr-instagram-11.svg"
+						alt="logo insta"
+						class="insta"
+					/>
+				</a>
+			</div>
+
+			<div class="mail">
+				<img
+					src="asset/icon/email-svgrepo-com.svg"
+					alt="mail"
+					class="monmail"
+				/>
+			</div>
+		</footer>
+
+		<script
+			src="https://kit.fontawesome.com/8e68aefddc.js"
+			crossorigin="anonymous"
+		></script>
+
+		<script>
+			function toggleLanguageMenu() {
+				const menu = document.getElementById("languageMenu");
+				menu.classList.toggle("show");
+			}
+
+			const choixlangue = document.getElementById("choixlangue");
+			choixlangue.addEventListener("click", () => {
+				toggleLanguageMenu();
+			});
+			window.addEventListener("click", (event) => {
+				if (!event.target.matches("#choixlangue")) {
+					let languagemenu = document.getElementById("languageMenu");
+					if (languagemenu.classList.contains("show")) {
+						languagemenu.classList.remove("show");
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
