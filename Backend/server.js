@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 
 app.post("/test-purchase", async (req, res) => {
 	try {
-		// Créer un achat avec des informations simples
 		const purchase = new Purchase({
 			acheteur: {
 				nom: "Test User",
@@ -23,14 +22,12 @@ app.post("/test-purchase", async (req, res) => {
 				adresse: "123 Test Street",
 				telephone: "0123456789",
 			},
-			oeuvre: "67938edc01227ff458e40933", // Remplacer par un ObjectId valide d'une oeuvre
+			oeuvre: "67938edc01227ff458e40933",
 			paymentMethod: "credit_card",
 		});
 
-		// Sauvegarder l'achat dans la base de données
 		const savedPurchase = await purchase.save();
 
-		// Retourner la réponse
 		res.status(200).json({
 			message: "Achat enregistré avec succès !",
 			purchase: savedPurchase,
@@ -55,7 +52,6 @@ mongoose
 		console.log("Error connecting to MongoDB:", error.message);
 	});
 
-// Forcer la création des collections 'oeuvres' et 'purchases'
 const db = mongoose.connection.db;
 
 const purchaseSchema = new mongoose.Schema(
@@ -75,11 +71,10 @@ const purchaseSchema = new mongoose.Schema(
 		dateCommande: { type: Date, default: Date.now },
 	},
 	{ timestamps: true }
-); // Cette ligne doit être dans les accolades du schéma
+);
 
 module.exports = Purchase;
 
-// Initialisation de Nodemailer pour l'envoi des emails
 const transporter = nodemailer.createTransport({
 	service: "gmail",
 	auth: {
@@ -131,23 +126,19 @@ const ajouterDessins = () => {
 				}
 
 				if (stat.isFile()) {
-					// Vérifie si l'image existe déjà dans la base de données
-					Oeuvre.findOne({ titre: file }) // Ici, on utilise le titre comme identifiant unique
+					Oeuvre.findOne({ titre: file })
 						.then((existingOeuvre) => {
 							if (!existingOeuvre) {
-								// Si l'œuvre n'existe pas déjà
-								const imageUrl = `/images/dessins/${file}`; // URL relative pour l'image
+								const imageUrl = `/images/dessins/${file}`;
 
-								// Créer une nouvelle oeuvre avec l'URL de l'image
 								const oeuvre = new Oeuvre({
-									titre: file, // Le titre peut être le nom de l'image ou autre chose
-									description: "Description de l'œuvre", // Tu peux personnaliser cela
-									prix: 100, // Prix à définir
+									titre: file,
+									description: "Description de l'œuvre",
+									prix: 100,
 									image: imageUrl,
 									categorie: "dessins",
 								});
 
-								// Sauvegarder l'objet dans MongoDB
 								oeuvre
 									.save()
 									.then(() => {
@@ -177,14 +168,12 @@ const ajouterDessins = () => {
 	});
 };
 
-// 2. Appeler la fonction après sa déclaration
-ajouterDessins(); // Appel de la fonction ici
+ajouterDessins();
 
 const ajouterPeintures = () => {
 	const peinturesDir = path.resolve(__dirname, "../Frontend/images/peintures");
 	console.log("Chemin vers le dossier peintures:", peinturesDir);
 
-	// Lire les fichiers du dossier 'dessins'
 	fs.readdir(peinturesDir, (err, files) => {
 		if (err) {
 			console.error("Erreur lors de la lecture du dossier peintures:", err);
@@ -200,23 +189,19 @@ const ajouterPeintures = () => {
 				}
 
 				if (stat.isFile()) {
-					// Vérifie si l'image existe déjà dans la base de données
-					Oeuvre.findOne({ titre: file }) // Ici, on utilise le titre comme identifiant unique
+					Oeuvre.findOne({ titre: file })
 						.then((existingOeuvre) => {
 							if (!existingOeuvre) {
-								// Si l'œuvre n'existe pas déjà
-								const imageUrl = `/images/peintures/${file}`; // URL relative pour l'image
+								const imageUrl = `/images/peintures/${file}`;
 
-								// Créer une nouvelle oeuvre avec l'URL de l'image
 								const oeuvre = new Oeuvre({
-									titre: file, // Le titre peut être le nom de l'image ou autre chose
-									description: "Description de l'œuvre", // Tu peux personnaliser cela
-									prix: 100, // Prix à définir
+									titre: file,
+									description: "Description de l'œuvre",
+									prix: 100,
 									image: imageUrl,
 									categorie: "peintures",
 								});
 
-								// Sauvegarder l'objet dans MongoDB
 								oeuvre
 									.save()
 									.then(() => {
@@ -248,13 +233,11 @@ const ajouterPeintures = () => {
 
 ajouterPeintures();
 
-// Route pour recevoir les achats
 app.post("/submit", async (req, res) => {
 	const { name, email, address, paymentMethod, productName, price, productId } =
 		req.body;
 	console.log("Received productId:", productId);
 
-	// Recherche de l'œuvre dans la base de données
 	let oeuvre;
 	try {
 		oeuvre = await Oeuvre.findById(productId);
@@ -271,23 +254,20 @@ app.post("/submit", async (req, res) => {
 
 	console.log("Oeuvre trouvée:", oeuvre);
 
-	// Créer l'objet de la commande
 	const purchase = new Purchase({
 		acheteur: {
 			nom: name,
 			email,
 			adresse: address,
 		},
-		oeuvre: oeuvre._id, // Utilisation de l'ID de l'œuvre
+		oeuvre: oeuvre._id,
 		paymentMethod,
 	});
 
 	try {
-		// Sauvegarder la commande
 		const savedPurchase = await purchase.save();
-		console.log("Purchase saved:", savedPurchase); // Log de l'achat enregistré
+		console.log("Purchase saved:", savedPurchase);
 
-		// Message pour l'utilisateur
 		const userMessage = `
       <h3>Merci beaucoup pour votre commande, ${name}</h3>
       <p>Nous avons bien reçu votre commande pour "${productName}".</p>
@@ -297,7 +277,6 @@ app.post("/submit", async (req, res) => {
       <p>Nous vous enverrons un e-mail lorsque votre commande sera expédiée.</p>
     `;
 
-		// Envoi de l'email à l'utilisateur
 		sendEmail(
 			email,
 			"Confirmation de votre commande",
@@ -305,7 +284,6 @@ app.post("/submit", async (req, res) => {
 			userMessage
 		);
 
-		// Message pour l'administrateur
 		const adminMessage = `
       <h3>Nouvelle vente</h3>
       <p>Un utilisateur a acheté "${productName}".</p>
@@ -316,7 +294,6 @@ app.post("/submit", async (req, res) => {
       <p><strong>Méthode de paiement:</strong> ${paymentMethod}</p>
     `;
 
-		// Envoi de l'email à l'administrateur
 		sendEmail(
 			"admin@example.com",
 			"Nouvelle vente",
@@ -324,7 +301,6 @@ app.post("/submit", async (req, res) => {
 			adminMessage
 		);
 
-		// Réponse à l'utilisateur
 		res.status(200).json({
 			message: "Purchase recorded successfully!",
 			date: savedPurchase.dateCommande,
